@@ -1,10 +1,16 @@
+
 const bodyParser= require('body-parser')
 const express = require('express');
 const app = express();
 const MongoClient = require('mongodb').MongoClient
 
 
-MongoClient.connect('mongodb+srv://stoner:stoner@cluster0.0ahacqh.mongodb.net/?retryWrites=true&w=majority')
+require('dotenv').config({ path: 'secret/vars.env' })
+// dotenv.config({ path: './secret/vars/.env' });
+// const connectionString = process.env.DB_CONNECT
+const connectionString = process.env.DB_CONNECT
+
+MongoClient.connect(connectionString)
   .then(client =>{
   const db = client.db('CRUD')
   const quotesCollection = db.collection('quotes')
@@ -63,6 +69,15 @@ app.put('/quotes', (req, res) => {
   .catch(error => console.error(error))
 })
 
+app.delete('/quotes', (req, res) =>{
+  quotesCollection.deleteOne(
+    {  },//fill in name: req.body.name to query specific
+  )
+  .then(result => {
+    res.json(`Deleted Darth Vader's quote`)
+  })
+  .catch(error => console.error(error))
+})
 app.delete('/quotes', (req, res) =>{
   quotesCollection.deleteOne(
     { name: req.body.name },
