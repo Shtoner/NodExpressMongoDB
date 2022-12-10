@@ -9,7 +9,7 @@ require('dotenv').config({ path: 'secret/vars.env' })
 // dotenv.config({ path: './secret/vars/.env' });
 // const connectionString = process.env.DB_CONNECT
 const connectionString = process.env.DB_CONNECT
-
+console.log(connectionString)
 MongoClient.connect(connectionString)
   .then(client =>{
   const db = client.db('CRUD')
