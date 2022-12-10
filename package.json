@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build" : "nodemon --watch src/ --exec babel ./src --out-dir ./dist --source-maps --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "nodemon src/server.js",
     "serve": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
